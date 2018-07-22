@@ -100,9 +100,54 @@ router.get('/:id', function(request, response){
             .status(200)
             .send(user);
         }
+    });
+});
+
+
+// 10. This route deletes the specified user by ID.
+router.delete('/:id', function(request, response){
+
+    User.findByIdAndRemove(request.params.id, function(err, user){
+
+        if(err){
+            response
+            .status(500)
+            .send("The server was unable to delete the specified user");
+        } else {
+            response
+            .status(200)
+            .send("User '" + user.name + "' was deleted.");
+        }
 
     });
-
 });
+
+
+// 11. This route updates the specified user by ID. This function also takes
+//     a body parameter. The only HTTP methods that have a body are POST and PUT.
+router.put('/:id', function(request, response){
+
+    // 11.1 The findByIdAndUpdate() function takes three arguments. An ID, an object
+    //      corresponding to the user whose value(s) will be updated, and a callback.
+    //      The "{new: true}" argument specifies that you want the updated version of
+    //      the object returned to the caller, not the original version.
+    User.findByIdAndUpdate(request.params.id,
+                           request.body,
+                           {new: true},
+                           function(err, user){
+
+        if(err){
+            response
+            .status(500)
+            .send("The server was unable to delete the specified user");
+        } else {
+            response
+            .status(200)
+            .send("User '" + user.name + "' was updated:\n" + user);
+        }
+
+    });
+});
+
 
 module.exports = router;
