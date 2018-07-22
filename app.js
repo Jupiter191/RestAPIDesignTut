@@ -6,5 +6,6 @@
 //    called with require();
 var express = require('express');
 var app = express();
+var dbConnection = require('./db'); // 3.1 Handles the database connection
 
 module.exports = app;

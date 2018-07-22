@@ -2,9 +2,9 @@
   "name": "rest_api_design",
   "version": "1.0.0",
   "description": "A tutorial app for restful API design with Node.js",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
