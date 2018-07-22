@@ -29,6 +29,10 @@ router.post('/', function(request, response){
     // 6.1 The create function of the User model is used to insert values
     //     into the MongoDB database. It is given the parameters we specified
     //     in our schema earlier.
+    
+    // 8.  NOTE: When creating Postman tests with a body, you must check
+    //     "x-www-form-urlencoded" instead of "form-data", otherwise it
+    //     will not work.
     User.create({
         name     : request.body.name,
         email    : request.body.email,
@@ -41,7 +45,7 @@ router.post('/', function(request, response){
         //     in this case). We handle these errors with the appropriate status
         //     codes and messages from the server.
         if(err){
-            return response
+            response
             .status(500)
             .send("There was a problem adding the user information to the database");
         } else {
@@ -65,7 +69,7 @@ router.get('/', function(request, response){
         //     The second is a function that takes the error and success values and
         //     responds accordingly as before.
         if(err){
-            return response
+            response
             .status(500)
             .send("There was a problem getting all users from the database");
         } else {
@@ -74,6 +78,30 @@ router.get('/', function(request, response){
             .send(users);
         }
     });
+});
+
+
+// 9. Here we create a route to GET a specific user from our DB. The ":" syntax
+//    is used to specify arguments.
+router.get('/:id', function(request, response){
+
+    // 9.1 The property we want to refer to in our schema is "_id", not "id".
+    //     As mentioned earlier, find can take an empty object or an object
+    //     with certain parameters that may match an entry in the DB.
+    User.find({ _id: request.params.id }, function(err, user){
+
+        if(err){
+            response
+            .status(500)
+            .send("The server was unable to find the specified user");
+        } else {
+            response
+            .status(200)
+            .send(user);
+        }
+
+    });
+
 });
 
 module.exports = router;
