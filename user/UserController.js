@@ -85,10 +85,11 @@ router.get('/', function(request, response){
 //    is used to specify arguments.
 router.get('/:id', function(request, response){
 
-    // 9.1 The property we want to refer to in our schema is "_id", not "id".
-    //     As mentioned earlier, find can take an empty object or an object
-    //     with certain parameters that may match an entry in the DB.
-    User.find({ _id: request.params.id }, function(err, user){
+    // 9.1 This function finds a single user by their ID with the findById() function.
+    //     As mentioned earlier, find() can take an empty object or an object
+    //     with certain parameters that may match an entry in the DB. This could
+    //     also be used to get the same result, like "User.find({ _id: request.params.id }"
+    User.findById(request.params.id, function(err, user){
 
         if(err){
             response
