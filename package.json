@@ -1,0 +1,11 @@
+{
+  "name": "rest_api_design",
+  "version": "1.0.0",
+  "description": "A tutorial app for restful API design with Node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
